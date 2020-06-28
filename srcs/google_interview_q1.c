@@ -1,5 +1,9 @@
 /* Program to print when two busy persons can meet based upon their day's meeting schedule and inbound time.
  * Reference of the prompt: Name="Clément Mihailescu's YouTube Channel", Title="Google Coding Interview With A College Student", src="https://youtu.be/3Q_oYDQ2whs"
+ * Steps to run this code: 
+ *                        In the root directory there is a Makefile, Use "make google_interview_q1"
+ *                        It will create an object file and a binary file in objs/ and bins/ respectively.
+ *                        Run the executable from the bins/ by "./google_interview_q1"
  * Sample Inputs: 
  *                         +-------------+-------------+
  *                         | Person 1    | Person 2    |
