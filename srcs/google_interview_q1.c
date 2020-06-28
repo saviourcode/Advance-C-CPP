@@ -74,9 +74,9 @@ typedef struct time {
 /****************** Function Prototypes ******************/
 person initperson(const char *[],int,const char *[],int);
 void intersection_meeting_time(person*,person*);
-void cal_free_time(person *); 
+void cal_freetime(person *); 
 time conv_time(char *);
-void verify_add_elm_free_time(time,time,person*);
+void verify_add_elm_freetime(time,time,person*);
 void calloc_new_elm(time,person*);
 void realloc_new_elm(time,person*);
 /*********************************************************/
@@ -102,18 +102,27 @@ int main(void)
     printf("Person 1 ");
     // Initialize the person structure members with the user defined values
     p1 = PARAMINIT(meeting_time_person1,inbound_person1)
-    // Calculate the free time of person 1 and initialise it's free_time_ptr and free_time_len members
-    cal_free_time(&p1);
+    // Calculate the free time of person 1 and initialise it's freetime_ptr and freetime_len members
+    cal_freetime(&p1);
 
     printf("Person 2 ");
     // Initialize the person structure members with the user defined values
     p2 = PARAMINIT(meeting_time_person2,inbound_person2)
-    // Calculate the free time of person 2 and initialise it's free_time_ptr and free_time_len members
-    cal_free_time(&p2);
+    // Calculate the free time of person 2 and initialise it's freetime_ptr and freetime_len members
+    cal_freetime(&p2);
     
     printf("Both Persons Intersection ");
     // Find the time intervals when both the persons are free and list the intervals
     intersection_meeting_time(&p1,&p2);
+
+    // Free dynamically allocated memory from the heap.
+    for(int i=0;i<p1.freetime_len;i++)
+        free(p1.freetime_ptr[i]);
+    free(p1.freetime_ptr);
+
+    for(int i=0;i<p2.freetime_len;i++)
+        free(p2.freetime_ptr[i]);
+    free(p2.freetime_ptr);
 
     return 0;
 }
@@ -169,7 +178,7 @@ person initperson(const char *pm[], int npm, const char *pib[], int npib)
     return p;
 }
 
-/* Function Name: cal_free_time
+/* Function Name: cal_freetime
  * Input Type   : person structure
  * Purpose      : Calculates free time of a person from 
  *                meeting schedule and inbound time
@@ -177,26 +186,26 @@ person initperson(const char *pm[], int npm, const char *pib[], int npib)
  *                and assigns it approriate pointer for reference
  * Return Type  : void
 */
-void cal_free_time(person *p)
+void cal_freetime(person *p)
 {
     time t1,t2;
 
     t1 = CONVTIME(p->inbound_ptr[0])
     t2 = CONVTIME(p->meeting_ptr[0])
    
-    verify_add_elm_free_time(t1,t2,p);
+    verify_add_elm_freetime(t1,t2,p);
 
     for(int i=0;i<p->meeting_len/2-1;i++){
         t1 = CONVTIME(p->meeting_ptr[2*i+1])
         t2 = CONVTIME(p->meeting_ptr[2*i+2])
 
-        verify_add_elm_free_time(t1,t2,p);
+        verify_add_elm_freetime(t1,t2,p);
     }
 
     t1 = CONVTIME(p->meeting_ptr[p->meeting_len-1])
     t2 = CONVTIME(p->inbound_ptr[1])
 
-    verify_add_elm_free_time(t1,t2,p);
+    verify_add_elm_freetime(t1,t2,p);
 #if DEBUG
     printf("\n\t");
 #endif
@@ -241,7 +250,7 @@ void intersection_meeting_time(person *p1, person *p2)
                 td = t2;
             }
 
-            verify_add_elm_free_time(tu,td,&r); 
+            verify_add_elm_freetime(tu,td,&r); 
         }
         else{
             tu = t1;
@@ -255,7 +264,7 @@ void intersection_meeting_time(person *p1, person *p2)
                 td = t2;
             }
 
-            verify_add_elm_free_time(tu,td,&r);
+            verify_add_elm_freetime(tu,td,&r);
 
         }
     }
@@ -273,6 +282,10 @@ void intersection_meeting_time(person *p1, person *p2)
     }
     printf("\b \b\b \b}\n\n");
 
+    // Free the dynamically allocated memory from the heap.
+    for(int i=0;i<r.freetime_len;i++)
+        free(r.freetime_ptr[i]);
+    free(r.freetime_ptr);
 }
 /*********************************************************/
 
@@ -294,15 +307,15 @@ time conv_time(char *end)
     return t;
 }
 
-/* Function Name: verify_add_elm_free_time
+/* Function Name: verify_add_elm_freetime
  * Input Type   : Two time structures and one person pointer structure
  * Purpose      : Verifies if two times have difference of at least MEETING_INTERVAL,
                   if it is then adds those time intervals to the 
-                  free_time heap string array of a person
- * Output Type  : Verify and then add element to free_time heap
+                  freetime heap string array of a person
+ * Output Type  : Verify and then add element to freetime heap
  * Return Type  : void
 */
-void verify_add_elm_free_time(time t1,time t2, person *p)
+void verify_add_elm_freetime(time t1,time t2, person *p)
 {
     if((t2.hour*60+t2.minute)-(t1.hour*60+t1.minute)>=MEETING_INTERVAL){
 #if DEBUG
