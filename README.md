@@ -6,4 +6,4 @@
     * `./<file_name>`
 
 ## Pull Requests
-* Consider opening PRs for suggestions! Yeah.
+* Consider opening PRs for suggestions!
