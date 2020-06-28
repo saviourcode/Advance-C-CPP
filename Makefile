@@ -10,8 +10,8 @@ TARGET = $(MAKECMDGOALS)
 
 $(TARGET): $(OBJS_DIR)/$(TARGET).o
 	$(info => Creating Binary File)
-	$(CXX) $(CXXFLAGS) $(TARGET) $(OBJS_DIR)/$(TARGET).o
+	$(CXX) $(CXXFLAGS) $(BINS_DIR)/$(TARGET) $(OBJS_DIR)/$(TARGET).o
 
-$(OBJS_DIR)/$(TARGET).o: $(SRCS_DIR)/$(TARGET).cpp
+$(OBJS_DIR)/$(TARGET).o: $(SRCS_DIR)/$(TARGET).c
 	$(info => Creating Object File)
-	$(CXX) -c $(CXXFLAGS) $(OBJS_DIR)/$(TARGET).o $(SRCS_DIR)/$(TARGET).cpp
+	$(CXX) -c $(CXXFLAGS) $(OBJS_DIR)/$(TARGET).o $(SRCS_DIR)/$(TARGET).c
