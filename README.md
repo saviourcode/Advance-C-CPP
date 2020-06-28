@@ -4,3 +4,6 @@
     * `make <file_name>`
     * `cd bins/`
     * `./<file_name>`
+
+## Pull Requests
+* Consider opening PRs for suggestions!
