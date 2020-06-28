@@ -1,3 +1,24 @@
+/* Program to print when two busy persons can meet based upon their day's meeting schedule and inbound time. 
+ * Sample Inputs: 
+ *                         +-------------+-------------+
+ *                         | Person 1    | Person 2    |
+ * +-----------------------+-------------+-------------+
+ * | Meeting Time Schedule | 09:00-10:30 | 10:00-11:30 |
+ * |                       | 12:00-13:00 | 12:30-14:30 |
+ * |                       | 16:00-18:00 | 14:30-15:00 |
+ * |                       |             | 16:00-17:00 |
+ * +-----------------------+-------------+-------------+
+ * | Inbound Time Interval | 09:00-20:00 | 10:00-18:30 |
+ * +-----------------------+-------------+-------------+
+ * 
+ * Sample Output:
+ * For Meeting Interval: 30 minutes
+ * +-----------------------------+-------------+
+ * | Two Person Meeting Schedule | 11:30-12:00 |
+ * |                             | 15:00-16:00 |
+ * |                             | 18:00-18:30 |
+ * +-----------------------------+-------------+
+*/
 #include <stdio.h> /* For printf() */
 #include <stdlib.h> /* For dynamic memory allocation func() */
 
