@@ -1,4 +1,5 @@
-/* Program to print when two busy persons can meet based upon their day's meeting schedule and inbound time. 
+/* Program to print when two busy persons can meet based upon their day's meeting schedule and inbound time.
+ * Reference of the prompt: Name="Clément Mihailescu's YouTube Channel", Title="Google Coding Interview With A College Student", src="https://youtu.be/3Q_oYDQ2whs"
  * Sample Inputs: 
  *                         +-------------+-------------+
  *                         | Person 1    | Person 2    |
