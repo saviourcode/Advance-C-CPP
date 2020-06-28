@@ -26,8 +26,9 @@
 #define DEBUG 1 /* 1 For Verbose Output, 0 For to the point Output */
 
 /***************** User Definable Region *****************/
-#define MEETING_INTERVAL 30 
+#define MEETING_INTERVAL 30 /* In Minutes */
 
+// All Times are in 24 Hour Format (Military Time)
 const char *meeting_time_person1[] = {
     "09:00","10:30",
     "12:00","13:00",
